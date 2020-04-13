@@ -2,6 +2,7 @@ package com.nexon.listviewpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.nexon.listviewpractice.adapters.RoomAdapter
 import com.nexon.listviewpractice.datas.Room
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,5 +27,18 @@ class MainActivity : AppCompatActivity() {
 
         mRoomAdapter = RoomAdapter(this, R.layout.room_list_item, roomList)
         roomListView.adapter = mRoomAdapter
+
+//      각 아이템 터치시 수행할 로직
+        roomListView.setOnItemClickListener { parent, view, position, id ->
+            Toast.makeText(this, "${position+1}째 줄 선택", Toast.LENGTH_SHORT).show()
+        }
+
+//      각 아이템을 길게 터치할때 수행할 로직
+        roomListView.setOnItemLongClickListener { parent, view, position, id ->
+            Toast.makeText(this, "${position+1}째 줄 오래 선택", Toast.LENGTH_SHORT).show()
+
+            return@setOnItemLongClickListener true
+        }
+
     }
 }
