@@ -2,11 +2,16 @@ package com.nexon.listviewpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.nexon.listviewpractice.adapters.RoomAdapter
 import com.nexon.listviewpractice.datas.Room
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 //  화면에 뿌려줄 아이템들이 담긴 리스트를 멤버변수로 생성
     val roomList = ArrayList<Room>()
+//  어뎁터에 데이터리스트를 뿌려주기 위해 어뎁터를 객체화해서 가져오기
+//  어뎁터는 onCreate()시점에 데이터를 넣어줘야하므로 일단 처음 만들때는 null로 만들고 create시점에 데이터를 넣어야함
+    var mRoomAdapter : RoomAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,5 +24,7 @@ class MainActivity : AppCompatActivity() {
         roomList.add(Room(35000, "경기도 남양주시", 12,"리모델링 완료 보러오세요~!" ))
         roomList.add(Room(4000, "청주시 흥덕구 광진구 자양동 뚝섬로 712-8", 2,"건물주 直 하시 입주 가능" ))
 
+        mRoomAdapter = RoomAdapter(this, R.layout.room_list_item, roomList)
+        roomListView.adapter = mRoomAdapter
     }
 }
